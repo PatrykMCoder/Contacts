@@ -12,7 +12,6 @@ class ContactsHelper {
 
     fun getDataAboutNumbers(contentResolver: ContentResolver) : ArrayList<ContactsObject> {
         val arrayData = arrayListOf<ContactsObject>()
-        val contentResolver = contentResolver
 
         val cursor = contentResolver.query(
             ContactsContract.Contacts.CONTENT_URI,
@@ -43,7 +42,7 @@ class ContactsHelper {
         return arrayData
     }
 
-    fun readFromNumber(contentResolver: ContentResolver, ID: String): String {
+    private fun readFromNumber(contentResolver: ContentResolver, ID: String): String {
         val phoneCursor = contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             null,
