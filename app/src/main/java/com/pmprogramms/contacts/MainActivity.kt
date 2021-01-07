@@ -29,25 +29,26 @@ class MainActivity : AppCompatActivity() {
             null, null, null, null, null
         )
 
-        try {
-            if (cursor != null) {
-                cursor.moveToFirst()
-                while (cursor.moveToNext()) {
+        cursor.use { c ->
+            if (c != null) {
+                c.moveToFirst()
+                while (c.moveToNext()) {
                     var id =
-                        cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID))
+                        c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID))
 
                     var name =
-                        cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY))
+                        c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY))
 
-                    var number = readFromNumber(contentResolver, id)
+                    val number = readFromNumber(contentResolver, id)
 
-                    arrayContacts.add(ContactsObject(name, number))
-                    cursor.moveToNext()
+                    val imageUri : String? = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
+                    if (imageUri != null)
+                        arrayContacts.add(ContactsObject(name, number, imageUri))
+                    else
+                        arrayContacts.add(ContactsObject(name, number, null))
+                    c.moveToNext()
                 }
             }
-
-        } finally {
-            cursor!!.close()
         }
 
         adapter = RecyclerViewAdapter(arrayContacts)
