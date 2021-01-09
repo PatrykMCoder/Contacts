@@ -1,6 +1,5 @@
 package com.pmprogramms.contacts.recyclerview
 
-import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +8,13 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.pmprogramms.contacts.ContactDetailsActivity
 import com.pmprogramms.contacts.R
-import com.pmprogramms.contacts.helper.objects.ContactsObject
+import com.pmprogramms.contacts.model.Contact
 
-class RecyclerViewAdapter(var arrayList: ArrayList<ContactsObject>) :
+
+class RecyclerViewAdapter(
+    private val arrayList: List<Contact>
+) :
     RecyclerView.Adapter<RecyclerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -29,8 +30,8 @@ class RecyclerViewAdapter(var arrayList: ArrayList<ContactsObject>) :
         else holder.photoIV.setImageResource(R.drawable.ic_baseline_person_24)
 
         holder.container.setOnClickListener {
-            val intent = Intent(holder.container.context, ContactDetailsActivity::class.java)
-            holder.container.context.startActivity(intent)
+//            val intent = Intent(holder.container.context, ContactDetailsActivity::class.java)
+//            holder.container.context.startActivity(intent)
         }
 
         holder.container.setOnLongClickListener {

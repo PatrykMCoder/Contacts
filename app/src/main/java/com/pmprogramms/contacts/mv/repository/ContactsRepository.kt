@@ -1,17 +1,18 @@
-package com.pmprogramms.contacts.helper
+package com.pmprogramms.contacts.mv.repository
 
 import android.content.ContentResolver
+import android.content.Context
 import android.provider.ContactsContract
-import com.pmprogramms.contacts.helper.objects.ContactsObject
+import android.util.Log
+import com.pmprogramms.contacts.model.Contact
 
-class ContactsHelper {
+class ContactsRepository(
+    private val context: Context?
+) {
 
-    companion object {
-        val instance = ContactsHelper()
-    }
-
-    fun getDataAboutNumbers(contentResolver: ContentResolver) : ArrayList<ContactsObject> {
-        val arrayData = arrayListOf<ContactsObject>()
+    fun getContacts(): ArrayList<Contact> {
+        val arrayData = arrayListOf<Contact>()
+        val contentResolver = context!!.contentResolver
 
         val cursor = contentResolver.query(
             ContactsContract.Contacts.CONTENT_URI,
@@ -21,7 +22,7 @@ class ContactsHelper {
         cursor.use { c ->
             if (c != null) {
                 c.moveToFirst()
-                while (c.moveToNext()) {
+                do {
                     val id =
                         c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID))
 
@@ -30,14 +31,15 @@ class ContactsHelper {
 
                     val number = readFromNumber(contentResolver, id)
 
-                    val imageUri : String? = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
+                    val imageUri: String? =
+                        c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
                     if (imageUri != null)
-                        arrayData.add(ContactsObject(name, number, imageUri))
+                        arrayData.add(Contact(name, number, imageUri))
                     else
-                        arrayData.add(ContactsObject(name, number, null))
-                    c.moveToNext()
-                }
+                        arrayData.add(Contact(name, number, null))
+                } while (c.moveToNext())
             }
+
         }
         return arrayData
     }

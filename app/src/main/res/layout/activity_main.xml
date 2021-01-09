@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/recycler_contacts"
+   <fragment
+       android:id="@+id/fragment"
        android:layout_width="match_parent"
-       android:layout_height="match_parent" />
+       android:layout_height="match_parent"
+       android:name="com.pmprogramms.contacts.ContactsFragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
