@@ -4,16 +4,25 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import com.pmprogramms.contacts.MainActivity
 import com.pmprogramms.contacts.R
+import com.pmprogramms.contacts.fragment.ContactDetailsFragment
 import com.pmprogramms.contacts.model.Contact
+import com.pmprogramms.contacts.mv.ContactsViewModel
+import com.pmprogramms.contacts.mv.factory.ContactsViewModelFactory
+import com.pmprogramms.contacts.mv.repository.ContactsRepository
+import com.pmprogramms.contacts.replaceFragment
 
 
 class RecyclerViewAdapter(
-    private val arrayList: List<Contact>
+    private val arrayList: List<Contact>,
+    private val mainActivity: MainActivity,
 ) :
     RecyclerView.Adapter<RecyclerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
@@ -26,12 +35,17 @@ class RecyclerViewAdapter(
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         holder.nameTV.text = arrayList[position].name
         holder.numberTV.text = arrayList[position].number
+
+        val repository = ContactsRepository(holder.container.context)
+        val factory = ContactsViewModelFactory(repository)
+        val model = ViewModelProviders.of(mainActivity, factory).get(ContactsViewModel::class.java)
+
         if (arrayList[position].imageUri != null) holder.photoIV.setImageURI(Uri.parse(arrayList[position].imageUri))
         else holder.photoIV.setImageResource(R.drawable.ic_baseline_person_24)
 
         holder.container.setOnClickListener {
-//            val intent = Intent(holder.container.context, ContactDetailsActivity::class.java)
-//            holder.container.context.startActivity(intent)
+            model.setSelectedContact(arrayList[position])
+            mainActivity.replaceFragment(ContactDetailsFragment())
         }
 
         holder.container.setOnLongClickListener {

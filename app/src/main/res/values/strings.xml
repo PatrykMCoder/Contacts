@@ -2,4 +2,6 @@
     <string name="app_name">Contacts</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="joe_test">Joe Test</string>
+    <string name="number">123456789</string>
 </resources>
