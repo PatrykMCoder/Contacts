@@ -3,5 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="joe_test">Joe Test</string>
-    <string name="number">123456789</string>
+    <string name="number_example">123456789</string>
+    <string name="number">Number</string>
+    <string name="name">Name</string>
+    <string name="save">Save</string>
+    <string name="email">email</string>
 </resources>

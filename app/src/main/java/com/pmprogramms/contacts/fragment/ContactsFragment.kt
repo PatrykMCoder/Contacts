@@ -1,5 +1,6 @@
 package com.pmprogramms.contacts.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pmprogramms.contacts.CreateNewContactActivity
 import com.pmprogramms.contacts.MainActivity
 import com.pmprogramms.contacts.R
 import com.pmprogramms.contacts.databinding.FragmentContactsBinding
@@ -29,6 +31,12 @@ class ContactsFragment : Fragment() {
         binding = FragmentContactsBinding.inflate(inflater, container, false)
         binding.recyclerContacts.setHasFixedSize(true)
         binding.recyclerContacts.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.addNewContact.setOnClickListener {
+            val intentActivity = Intent(context, CreateNewContactActivity::class.java)
+            startActivity(intentActivity)
+        }
+
         return binding.root
     }
 
@@ -44,5 +52,11 @@ class ContactsFragment : Fragment() {
                 binding.recyclerContacts.adapter = adapter
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getContacts()
+        adapter.notifyDataSetChanged()
     }
 }
