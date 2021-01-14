@@ -10,15 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.pmprogramms.contacts.R
 import com.pmprogramms.contacts.databinding.FragmentContactDetailsBinding
+import com.pmprogramms.contacts.dialog.FastMessageDialog
+import com.pmprogramms.contacts.helper.DatabaseHandler
 import com.pmprogramms.contacts.mv.ContactsViewModel
 import com.pmprogramms.contacts.mv.factory.ContactsViewModelFactory
 import com.pmprogramms.contacts.mv.repository.ContactsRepository
 
 class ContactDetailsFragment : Fragment() {
     private lateinit var binding: FragmentContactDetailsBinding
-
     private lateinit var model: ContactsViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +55,11 @@ class ContactDetailsFragment : Fragment() {
                     intentSMS.type = "vnd.android-dir/mms-sms";
                     intentSMS.putExtra("address", item.number);
                     context?.startActivity(intentSMS)
+                }
+
+                binding.fastMessageButton.setOnClickListener {
+                    val dialog = FastMessageDialog(item.number)
+                    dialog.show(parentFragmentManager, "fragmentdialog")
                 }
             }
         })
