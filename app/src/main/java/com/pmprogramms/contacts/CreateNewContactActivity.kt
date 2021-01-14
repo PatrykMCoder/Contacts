@@ -87,7 +87,7 @@ class CreateNewContactActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInf = menuInflater
-        menuInf.inflate(R.menu.menu, menu)
+        menuInf.inflate(R.menu.menu_new_contact, menu)
         return true
     }
 

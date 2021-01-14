@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Contacts</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="joe_test">Joe Test</string>
     <string name="number_example">123456789</string>
@@ -8,4 +7,7 @@
     <string name="name">Name</string>
     <string name="save">Save</string>
     <string name="email">email</string>
+    <string name="settings">Settings</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="enter_contents_sms">Enter contents sms</string>
 </resources>

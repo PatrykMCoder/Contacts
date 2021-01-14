@@ -35,7 +35,7 @@ class FastMessageDialog(private val number: String) : DialogFragment() {
         super.onCreateDialog(savedInstanceState)
         binding = DialogFastMessageBinding.inflate(LayoutInflater.from(context))
         val alertDialog = AlertDialog.Builder(context)
-
+        alertDialog.setTitle("Fast message value")
         alertDialog.setPositiveButton("Ok") { _: DialogInterface, _: Int ->
             sendSMS(number)
         }
@@ -78,6 +78,7 @@ class FastMessageDialog(private val number: String) : DialogFragment() {
     private fun loadMessages(context: Context) {
         val databaseHandler = DatabaseHandler(context)
         listMessagesValues = ArrayList()
+        listMessagesValues.add("Call me, please")
         arrayMessages = databaseHandler.getMessages()
         arrayMessages.forEach {
             listMessagesValues.add(it.value)

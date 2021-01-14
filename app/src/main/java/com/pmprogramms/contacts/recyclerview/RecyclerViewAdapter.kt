@@ -45,7 +45,7 @@ class RecyclerViewAdapter(
 
         holder.container.setOnClickListener {
             model.setSelectedContact(arrayList[position])
-            mainActivity.replaceFragment(ContactDetailsFragment())
+            mainActivity.replaceFragment(ContactDetailsFragment(), true)
         }
 
         holder.container.setOnLongClickListener {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:key="add_fast_msg"
+        app:summary="Create your fast message"
+        app:title="Add fast message" />
+
+    <Preference
+        app:key="feedback"
+        app:summary="Report technical issues or suggest new features"
+        app:title="Send feedback" />
+
+    <Preference
+        app:key="privacy"
+        app:summary=""
+        app:title="Privacy Policy" />
+
+    <Preference
+        app:key="sources"
+        app:summary=""
+        app:title="Open sources" />
+
+</PreferenceScreen>
