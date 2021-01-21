@@ -34,9 +34,9 @@ class ContactsRepository(
                     val imageUri: String? =
                         c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
                     if (imageUri != null)
-                        arrayData.add(Contact(name, number, imageUri))
+                        arrayData.add(Contact(id, name, number, imageUri))
                     else
-                        arrayData.add(Contact(name, number, null))
+                        arrayData.add(Contact(id, name, number, null))
                 } while (c.moveToNext())
             }
 

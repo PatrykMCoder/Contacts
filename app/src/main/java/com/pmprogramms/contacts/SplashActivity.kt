@@ -35,7 +35,9 @@ class SplashActivity : AppCompatActivity() {
             ).show()
             ActivityCompat.requestPermissions(this, permissions, ALL_PERMISSIONS)
         } else {
-            startActivity(Intent(this, MainActivity::class.java))
+            val mainActivityIntent = Intent(this, MainActivity::class.java)
+            mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(mainActivityIntent)
         }
     }
 
@@ -48,7 +50,10 @@ class SplashActivity : AppCompatActivity() {
         when (requestCode) {
             ALL_PERMISSIONS -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val mainActivityIntent = Intent(this, MainActivity::class.java)
+                    mainActivityIntent.flags =
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(mainActivityIntent)
                 } else {
                     Toast.makeText(
                         this,
